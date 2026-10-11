@@ -12,7 +12,7 @@ export const products: Product[] = [
     { file: 'images/screenshots/magic-validation.webp', alt: 'DataFix Magic validation results panel with sample data', caption: 'Check with confidence. Review validation results alongside your data.', width: 1600, height: 900 }
   ] }
 ]
-export const navigation = [{ id: 'products', label: 'Products' }, { id: 'features', label: 'Features' }, { id: 'screenshots', label: 'Screenshots' }, { id: 'faq', label: 'FAQ' }]
+export const navigation = [{ id: 'guides', label: 'Guides' }]
 export const faqs = [
   { question: 'What is DataFix?', answer: 'DataFix is a native Windows utility for inspecting, cleaning, repairing, transforming, and converting CSV, Excel XLSX, JSON, and SQLite files. Ordinary workflows do not require programming knowledge.' },
   { question: 'What is DataFix Magic?', answer: 'DataFix Magic is a Windows application focused on CSV and Excel XLSX business data. It adds configurable validation, exact and fuzzy duplicate review, reusable cleaning recipes, and folder-based batch processing.' },

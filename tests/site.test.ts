@@ -4,9 +4,38 @@ import { existsSync } from 'node:fs'
 import App from '../src/App.vue'
 import SiteHeader from '../src/components/SiteHeader.vue'
 import { products, faqs, navigation } from '../src/data'
+import { pages, resolvePage, pageStructuredData } from '../src/pages'
 afterEach(() => { document.body.innerHTML = '' })
 vi.stubEnv('BASE_URL', '/datafix-website/')
 describe('public marketing site', () => {
+  it.each(pages)('renders meaningful content and one H1 at $path', page => {
+    const wrapper = mount(App, { props: { page } })
+    expect(wrapper.findAll('h1')).toHaveLength(1)
+    expect(wrapper.find('main').text().length).toBeGreaterThan(1500)
+    expect(wrapper.find('a[href="/datafix-website/"]').exists()).toBe(true)
+    expect(wrapper.findAll('a[href="#"]')).toHaveLength(0)
+    if (page.kind !== 'home') expect(wrapper.find('h1').text()).toBe(page.h1)
+    if (page.kind === 'product') expect(wrapper.find('.product-hero a').attributes('href')).toBe(products.find(p => p.id === page.productId)!.storeUrl)
+    wrapper.unmount()
+  })
+  it('resolves all six routes and refresh index paths without mapping unknown routes to home', () => {
+    for (const page of pages) {
+      expect(resolvePage('/datafix-website/' + page.path)).toBe(page)
+      expect(resolvePage('/datafix-website/' + page.path + 'index.html')).toBe(page)
+    }
+    expect(resolvePage('/datafix-website/unknown/')).toBeUndefined()
+    expect(resolvePage('/datafix/')).toBeUndefined()
+    expect(new Set(pages.map(p => p.title)).size).toBe(6)
+    expect(new Set(pages.map(p => p.description)).size).toBe(6)
+  })
+  it('uses page-specific structured data without unverified offers or publication dates', () => {
+    for (const page of pages) {
+      const data = pageStructuredData(page)
+      expect(() => JSON.parse(JSON.stringify(data))).not.toThrow()
+      expect(JSON.stringify(data)).not.toMatch(/aggregateRating|offers|datePublished|dateModified/)
+      if (page.kind !== 'home') expect(data['@graph'][0]).toMatchObject({ url: 'https://sudipb001.github.io/datafix-website/' + page.path })
+    }
+  })
   it('renders both products with authentic icons and correct Store destinations', () => {
     const wrapper = mount(App)
     expect(wrapper.findAll('.product-card')).toHaveLength(2)

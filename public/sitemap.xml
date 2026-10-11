@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://sudipb001.github.io/datafix-website/</loc></url></urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://sudipb001.github.io/datafix-website/</loc></url>
+  <url><loc>https://sudipb001.github.io/datafix-website/datafix/</loc></url>
+  <url><loc>https://sudipb001.github.io/datafix-website/datafix-magic/</loc></url>
+  <url><loc>https://sudipb001.github.io/datafix-website/guides/remove-duplicate-rows-csv/</loc></url>
+  <url><loc>https://sudipb001.github.io/datafix-website/guides/clean-messy-excel-data/</loc></url>
+  <url><loc>https://sudipb001.github.io/datafix-website/guides/fix-common-csv-problems/</loc></url>
+</urlset>

@@ -1,6 +1,7 @@
 import { createSSRApp } from 'vue'
 import { renderToString } from '@vue/server-renderer'
 import App from './App.vue'
-import { structuredData } from './data'
-export const render = () => renderToString(createSSRApp(App))
-export const jsonLd = JSON.stringify(structuredData).replace(/</g, '\\u003c')
+import { pages, pageStructuredData, type Page } from './pages'
+export { pages }
+export const render = (page: Page) => renderToString(createSSRApp(App, { page }))
+export const jsonLd = (page: Page) => JSON.stringify(pageStructuredData(page)).replace(/</g, '\\u003c')
