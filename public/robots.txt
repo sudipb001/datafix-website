@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /datafix-website/
+Sitemap: https://sudipb001.github.io/datafix-website/sitemap.xml
